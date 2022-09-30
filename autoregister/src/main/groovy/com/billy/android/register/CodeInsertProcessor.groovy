@@ -1,6 +1,6 @@
 package com.billy.android.register
 
-import org.apache.commons.io.IOUtils
+
 import org.objectweb.asm.*
 
 import java.util.jar.JarEntry
@@ -129,11 +129,11 @@ class CodeInsertProcessor {
     }
 
     class MyMethodVisitor extends MethodVisitor {
-        boolean _static;
+        boolean _static
 
         MyMethodVisitor(int api, MethodVisitor mv, boolean _static) {
             super(api, mv)
-            this._static = _static;
+            this._static = _static
         }
 
         @Override

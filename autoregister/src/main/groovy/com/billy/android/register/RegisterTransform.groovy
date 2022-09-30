@@ -5,7 +5,7 @@ import com.android.build.gradle.internal.pipeline.TransformManager
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import org.apache.commons.codec.digest.DigestUtils
-import org.apache.commons.io.FileUtils
+import org.apache.commons.io.*
 import org.gradle.api.Project
 
 /**
@@ -16,7 +16,7 @@ import org.gradle.api.Project
 class RegisterTransform extends Transform {
 
     Project project
-    AutoRegisterConfig config;
+    AutoRegisterConfig config
 
     RegisterTransform(Project project) {
         this.project = project
@@ -95,7 +95,7 @@ class RegisterTransform extends Transform {
             }
             // 遍历目录
             input.directoryInputs.each { DirectoryInput directoryInput ->
-                long dirTime = System.currentTimeMillis();
+                long dirTime = System.currentTimeMillis()
                 // 获得产物的目录
                 File dest = outputProvider.getContentLocation(directoryInput.name, directoryInput.contentTypes, directoryInput.scopes, Format.DIRECTORY)
                 String root = directoryInput.file.absolutePath
@@ -115,7 +115,7 @@ class RegisterTransform extends Transform {
                         }
                     }
                 }
-                long scanTime = System.currentTimeMillis();
+                long scanTime = System.currentTimeMillis()
                 // 处理完后拷到目标文件
                 FileUtils.copyDirectory(directoryInput.file, dest)
                 println "auto-register cost time: ${System.currentTimeMillis() - dirTime}, scan time: ${scanTime - dirTime}. path=${root}"
@@ -157,7 +157,7 @@ class RegisterTransform extends Transform {
         File src = jarInput.file
         //遍历jar的字节码类文件，找到需要自动注册的类
         File dest = getDestFile(jarInput, outputProvider)
-        long time = System.currentTimeMillis();
+        long time = System.currentTimeMillis()
         if (!scanProcessor.scanJar(src, dest) //直接读取了缓存，没有执行实际的扫描
                 //此jar文件中不需要被注入代码
                 //为了避免增量编译时代码注入重复，被注入代码的jar包每次都重新复制

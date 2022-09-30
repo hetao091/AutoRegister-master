@@ -1,8 +1,37 @@
+
+plugins {
+    id 'maven-publish'
+}
 apply plugin: 'groovy'
+
+sourceCompatibility = JavaVersion.VERSION_11
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+
+                groupId = 'com.github.hetao091'
+                artifactId = 'aotoregister'
+                version = '1.0'
+                afterEvaluate {
+                    from components.java
+                }
+            }
+        }
+        repositories {
+            maven {
+                // 生成的插件位置
+                url = uri('../repo')
+            }
+        }
+    }
+}
 
 dependencies {
     implementation gradleApi()
     implementation localGroovy()
+    implementation  'commons-codec:commons-codec:1.10'
+    implementation  'com.google.code.gson:gson:2.8.5'
 }
 
 repositories {

@@ -9,11 +9,11 @@ import org.gradle.api.Project
  * @author billy.qi
  * @since 17/3/14 17:35
  */
-public class RegisterPlugin implements Plugin<Project> {
+class RegisterPlugin implements Plugin<Project> {
     public static final String EXT_NAME = 'autoregister'
 
     @Override
-    public void apply(Project project) {
+    void apply(Project project) {
         /**
          * 注册transform接口
          */
