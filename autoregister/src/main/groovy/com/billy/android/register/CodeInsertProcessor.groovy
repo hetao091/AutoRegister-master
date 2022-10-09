@@ -2,11 +2,13 @@ package com.billy.android.register
 
 
 import org.objectweb.asm.*
+import org.apache.commons.io.IOUtils
 
 import java.util.jar.JarEntry
 import java.util.jar.JarFile
 import java.util.jar.JarOutputStream
 import java.util.zip.ZipEntry
+
 /**
  *
  * @author billy.qi
